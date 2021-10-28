@@ -33,21 +33,46 @@
 //    }
 // }
 
+// Аргументы:
+// name - string
+// phone - string
+// address - object  {street, house, entrance, floor, flat}
+// goods  - object {id, title, count, price}
+// sum - number
+// Возврат: JSON
+
 function sendRequest(name, phone, address, goods, sum) {
-    let data = {goods: [], order: {}};
+ //   console.log("sendRequest: name = " + name);
+ //   console.log("sendRequest: phone = " + phone);
+ //   console.log("sendRequest: address = " + JSON.stringify(address));
+ //   console.log("sendRequest: sum = " + sum);
+ //   console.log("sendRequest: goods = " + JSON.stringify(goods));
+
+    let data = {client:Text, order: {address:Text, sum:Number}, goods: [{title:Text, count:Number}]};
+
+    // Заполняем объект по очереди
+    data.client = name + " " + phone;
+    data.order.address = `ул. ${address.street}, дом ${address.house}, ${address.entrance} подъезд, ${address.floor} этаж, кв ${address.flat}`;
+    data.order.sum = sum;
 
     let countOfGoods = goods.length;
-
-    for (let i = 0; i <= countOfGoods; i += 1) {
-        data.goods.push(goods[i].title);
-    }
-
-    data.order.address = address;
-    data.order.sum = name + phone + address + goods + sum;
-
-    data.client = 'Иван';
-
-    let jsonData = JSON.stringify(data);
+ 
+    for (let i = 0; i <= countOfGoods - 1 ; i += 1) 
+    {
+        let localGoods = {title:"", count:0};
+        localGoods.title = goods[i].title;
+        localGoods.count = goods[i].count;
+//        data.goods.push(localGoods);
+        data.goods[i] = localGoods;
+ //       console.log("sendRequest: конец цикла data.Goods(" + i +") = " + JSON.stringify(data.goods));
+ //       console.log("sendRequest: конец цикла data(" + i + ") = " + JSON.stringify(data));
+    } // for
+    
+ 
+//    let jsonData = JSON.stringify(data);
+    let Dd = {data:{}};
+    Dd.data = data;
+    let jsonData = JSON.stringify(Dd);
 
     return jsonData;
 }
