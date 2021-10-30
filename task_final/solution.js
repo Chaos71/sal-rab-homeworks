@@ -42,7 +42,7 @@
 // Возврат: JSON
 
 function sendRequest(name, phone, address, goods, sum) {
-    const data = {client:Text, order: {}, goods: []};
+    const data = {order: {}, goods: []};
    
        // Заполняем объект по очереди
        data.client = name + " " + phone;
